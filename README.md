@@ -13,7 +13,7 @@ The following installation instructions are for the Perlmutter supercomputer at 
 This loads the modules for both Selector and GenomeAtScale to prepare for setup.
 
 ```
-    source scripts/modules.sh
+source scripts/modules.sh
 ```
 
 ### First time setup and installation
@@ -21,7 +21,7 @@ This loads the modules for both Selector and GenomeAtScale to prepare for setup.
 This sets up and installs both the Selector and GenomeAtScale applications and their backend runtimes.
 
 ```
-    source scripts/setup.sh
+source scripts/setup.sh
 ```
 
 ## Running Instructions
@@ -50,91 +50,91 @@ The following instructions are for understanding the results and relating them t
 At the completion of each run, there are two outputs that are created:
 
 ```
-   jaccard_selector.out OR jaccard_ctf.out OR both          Output file from submitted job
-   jaccard_selector+pat+* OR jaccard+pat+* OR both          Output folder (in respective directory) from a CrayPat run if HWPC were collected
+jaccard_selector.out OR jaccard_ctf.out OR both          Output file from submitted job
+jaccard_selector+pat+* OR jaccard+pat+* OR both          Output folder (in respective directory) from a CrayPat run if HWPC were collected
 ```
 
 The `*.out` files contain the execution times of the run for the specific version. This result directly relates to Figure 2 (q) in the paper. An example output is shown below, where `0.06150 seconds` would be reported as the resulting value for the run.
 
 ```
-   ...
-   Running jaccard on 128 threads
-   K-mer Matrix is 15000x5000 and has 15248 nonzeros.
+...
+Running jaccard on 128 threads
+K-mer Matrix is 15000x5000 and has 15248 nonzeros.
 
-   Jaccard Similarity Matrix is 5000x5000 and has 12497374 values.
+Jaccard Similarity Matrix is 5000x5000 and has 12497374 values.
 
-   Running Jaccard Similarity K-mers (selector): 
-      0.06150 seconds
-   ...
+Running Jaccard Similarity K-mers (selector): 
+  0.06150 seconds
+...
 ```
 
 The `jaccard*+pat+*` folders contain information dumped by the CrayPat profiler (for more information see https://docs.nersc.gov/tools/performance/craypat/). To generate human-readable content, we run `pat_report` on the respective directory. This will display information of interest for the specified HWPC in the run, and will directly relate to Figures 2 (a-p). An example output is shown below, where we can see the L1 cache statistics which would be reported as the resulting values for the run.
 
 ```
-   user@perlmutter: ~> pat_report $PWD/Selector/hclib/modules/bale_actor/jaccard-selector/jaccard_kmer_selector+pat+190420-8718377t
-    CrayPat/X:  Version 23.02.0 Revision a53634a72  01/11/23 17:17:09
+user@perlmutter: ~> pat_report $PWD/Selector/hclib/modules/bale_actor/jaccard-selector/jaccard_kmer_selector+pat+190420-8718377t
+  CrayPat/X:  Version 23.02.0 Revision a53634a72  01/11/23 17:17:09
 
-    Number of PEs (MPI ranks):   128
-                            
-    Numbers of PEs per Node:      64  PEs on each of  2  Nodes
-                            
-    Numbers of Threads per PE:     2
-                            
-    Number of Cores per Socket:   64
+  Number of PEs (MPI ranks):   128
 
-    Execution start time:  Sun Mar 19 10:25:36 2023
+  Numbers of PEs per Node:      64  PEs on each of  2  Nodes
 
-    System name and speed:  nid004836  2.552 GHz (nominal)
+  Numbers of Threads per PE:     2
 
-    AMD   Milan                CPU  Family: 25  Model:  1  Stepping:  1
+  Number of Cores per Socket:   64
 
-    Core Performance Boost:  256 PEs have CPB capability
+  Execution start time:  Sun Mar 19 10:25:36 2023
+
+  System name and speed:  nid004836  2.552 GHz (nominal)
+
+  AMD   Milan                CPU  Family: 25  Model:  1  Stepping:  1
+
+  Core Performance Boost:  256 PEs have CPB capability
 
 
-    Current path to data file:
-    /Selector/hclib/modules/bale_actor/jaccard-selector/jaccard_kmer_selector+pat+190420-8718377t   (RTS, 2 data files)
+  Current path to data file:
+  /Selector/hclib/modules/bale_actor/jaccard-selector/jaccard_kmer_selector+pat+190420-8718377t   (RTS, 2 data files)
 
-    ...
-    ...
+  ...
+  ...
 
-    Processing step 7 of 10
-    Notes for table 5:
-    ...
-    ...
-    ==============================================================================
-    USER / #1.selector_jaccard
-    ------------------------------------------------------------------------------
-    Time%                                                  2.8% 
-    Time                                               0.060836 secs
-    Imb. Time                                          0.000013 secs
-    Imb. Time%                                             0.0% 
-    Calls                          16.438 /sec              1.0 calls
-    PAPI_L1_DCM                     0.057G/sec    2,369,390.898 misses
-    PAPI_L1_DCA                     2.252G/sec  110,478,052.633 refs
-    Average Time per Call                              0.060836 secs
-    CrayPat Overhead : Time          0.0%                       
-    perf::PERF_COUNT_HW_CACHE_L1I:ACCESS              1,214,778 
-    perf::PERF_COUNT_HW_CACHE_L1I:MISS                    5,868
-    ==============================================================================
+  Processing step 7 of 10
+  Notes for table 5:
+  ...
+  ...
+  ==============================================================================
+  USER / #1.selector_jaccard
+  ------------------------------------------------------------------------------
+  Time%                                                  2.8% 
+  Time                                               0.060836 secs
+  Imb. Time                                          0.000013 secs
+  Imb. Time%                                             0.0% 
+  Calls                          16.438 /sec              1.0 calls
+  PAPI_L1_DCM                     0.057G/sec    2,369,390.898 misses
+  PAPI_L1_DCA                     2.252G/sec  110,478,052.633 refs
+  Average Time per Call                              0.060836 secs
+  CrayPat Overhead : Time          0.0%                       
+  perf::PERF_COUNT_HW_CACHE_L1I:ACCESS              1,214,778 
+  perf::PERF_COUNT_HW_CACHE_L1I:MISS                    5,868
+  ==============================================================================
 
-    ...
-    ...
+  ...
+  ...
 
-    Hardware performance counter events:
-    PAPI_L1_DCM                           Level 1 data cache misses
-    PAPI_L1_DCA                           Level 1 data cache accesses
-    perf::PERF_COUNT_HW_CACHE_L1I:ACCESS  Undocumented counter
-    perf::PERF_COUNT_HW_CACHE_L1I:MISS    Undocumented counter
+  Hardware performance counter events:
+  PAPI_L1_DCM                           Level 1 data cache misses
+  PAPI_L1_DCA                           Level 1 data cache accesses
+  perf::PERF_COUNT_HW_CACHE_L1I:ACCESS  Undocumented counter
+  perf::PERF_COUNT_HW_CACHE_L1I:MISS    Undocumented counter
 
-    Estimated minimum instrumentation overhead per call of a traced function,
-    which was subtracted from the data shown in this report
-    (for raw data, use the option:  -s overhead=include):
-        Time  0.114  microsecs
+  Estimated minimum instrumentation overhead per call of a traced function,
+  which was subtracted from the data shown in this report
+  (for raw data, use the option:  -s overhead=include):
+      Time  0.114  microsecs
 
-    Number of traced functions that were called:  7
+  Number of traced functions that were called:  7
 
-    (To see the list, specify:  -s traced_functions=show)
-   user@perlmutter: ~> 
+  (To see the list, specify:  -s traced_functions=show)
+user@perlmutter: ~> 
 ```
 
 ## Top-Level Directory Organization
