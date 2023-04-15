@@ -25,10 +25,10 @@ HWPC=$4
 echo $HWPC > hwpc.txt
 
 # Run sbatch files corresponding to application version from  user
-if [ $application="selector" ] ; then
+if [ $application = "selector" ] ; then
   echo "Running evaluations of the Selector application using $CORES cores and $NODES nodes"
   sbatch -N $NODES -n $CORES $PWD/scripts/jaccard_selector.sbatch
-elif [ $application=="ctf" ] ; then
+elif [ $application = "ctf" ] ; then
   echo "Running evaluations of the GenomeAtScale application using $CORES cores and $NODES nodes"
   sbatch -N $NODES -n $CORES $PWD/scripts/jaccard_ctf.sbatch
 else
@@ -40,4 +40,5 @@ fi
 echo "---------------------------------------------------------------------------------------------------------------"
 echo "Job(s) submitted! Please check job status for completion and see README for output interpretation instructions."
 echo "---------------------------------------------------------------------------------------------------------------"
+
 
