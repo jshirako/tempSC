@@ -14,7 +14,7 @@ cd $PWD/Selector/hclib/modules/bale_actor/jaccard-selector/
 
 # Export corresponding HWPC set specified by user
 counters=" "
-if [ $HWPC -eq "0" ] ; then
+if [ $HWPC -eq 0 ] ; then
   unset PAT_RT_PERFCTR
 elif [ $HWPC -eq 1 ] ; then
   export PAT_RT_PERFCTR="PAPI_L1_DCA,PAPI_L1_DCM,perf::PERF_COUNT_HW_CACHE_L1I:ACCESS,perf::PERF_COUNT_HW_CACHE_L1I:MISS"
