@@ -28,18 +28,20 @@ source scripts/setup.sh
 
 The following running instructions are for the Perlmutter supercomputer at the National Energy Research Scientific Computing Center (NERSC). 
 
-The run script (`/scripts/run.sh`) has 3 options:
+The run script (`/scripts/run.sh`) has 4 options:
 
 ```
-   -v <selector | ctf | both>             Selects which application (or both) to run
-   -n <1...inf>                           Selects the number of cores for the run
-   -N <1...inf>                           Selects the number of nodes for the run
-   -h <0...5>                             Selects the set of HWPC to collect (0:none, 1:L1DA/L1DM/L1IA/L1IM, 2:L2DR/L2DM/L2IR/L2IM, 3:TLBDM/TLBIM, 4:BRINS/BRMSP, 5:INS/CYC)
+   source /scripts/run.sh [selector | ctf | both] [1...inf] [1...inf] [0...5]
+   
+   [selector | ctf | both]             Selects which application (or both) to run
+   [1...inf]                           Selects the number of cores for the run
+   [1...inf]                           Selects the number of nodes for the run
+   [0...5]                             Selects the set of HWPC to collect (0:none, 1:L1DA/L1DM/L1IA/L1IM, 2:L2DR/L2DM/L2IR/L2IM, 3:TLBDM/TLBIM, 4:BRINS/BRMSP, 5:INS/CYC)
 ```
 
 Note: when selecting the number of nodes for the run, please remember that GenomeAtScale uses 32 cores/node and Selector uses either 32 or 64 cores/node.
 
-For example, `source /scripts/run.sh -v selector -n 1024 -N 16 -h 2` will run an experiment for the Selector application using 1024 cores on 16 nodes, collecting L2 cache statistics.
+For example, `source /scripts/run.sh selector 1024 16 2` will run an experiment for the Selector application using 1024 cores on 16 nodes, collecting L2 cache statistics.
 
 This will submit an sbatch file to the run queue at Perlmutter. At job completion, a `jaccard_selector.out` or `jaccard_ctf.out` or both will be created, showing the CMD output of the run. Moreover, if HWPC were collected, a directory with the structure `jaccard*+pat+*` will be created in `/Selector/hclib/modules/bale_actor/jaccard-selector/` or `/GenomeAtScale/jaccard-ctf/` or both. Please see the Output Interpretation section for instructions on how to understand these results.
 
