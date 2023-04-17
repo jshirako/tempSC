@@ -34,8 +34,8 @@ The run script (`/scripts/run.sh`) has 4 options:
    source /scripts/run.sh [selector | ctf | both] [1...inf] [1...inf] [0...5]
    
    [selector | ctf | both]             Selects which application (or both) to run
-   [1...inf]                           Selects the number of cores for the run
-   [1...inf]                           Selects the number of nodes for the run
+   [1...inf]                           Selects the number of cores for the run ([32...16384] used in the paper)
+   [1...inf]                           Selects the number of nodes for the run ([1...512] used in the paper)
    [0...5]                             Selects the set of HWPC to collect (0:none, 1:L1DA/L1DM/L1IA/L1IM, 2:L2DR/L2DM/L2IR/L2IM, 3:TLBDM/TLBIM, 4:BRINS/BRMSP, 5:INS/CYC)
 ```
 
